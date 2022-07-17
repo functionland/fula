@@ -32,9 +32,10 @@ export class FulaDID implements IFulaDID {
         return this.did.authenticate();
     }
     /**
-     * Creates mnemocic phrase and private key
+     * Activate decentralized identity
      * @function create()
-	 * @returns Object - { sauthDID }
+     * @property _secretKey: string, signature: string
+	 * @returns Object - { authDID }
 	 */
     async create (_secretKey: string, signature: string) {
         this.rootKey = sha3.keccak256(JSON.stringify({

@@ -49,27 +49,12 @@ Install NPM package
 <!-- USAGE EXAMPLES -->
 ## Decentralized Identity (DID) 
    ```js
-    import {FullaDID} from '@functionland/fula-sec'
+    import {FulaDID} from '@functionland/fula-sec'
 
     // Fulla DID
-    const fullaDID = new FullaDID();
-    // ...
-    // Create DID identity () => return {did|authDID, mnemonic, privateKey}
-    await fullaDID.create();
-
-    // You can also call backup option by using getter -> fullaDID.backup () => return {did|authDID, mnemonic, privateKey}
-    
-    // Import Options:
-    // 1. Import with mnemonic
-    // 2. Import with privateKey
-
-    // Import existing mnemonic phrase () => return {did|authDID, privateKey}
-    // mnemonic example: 'mercy drip similar hole oil lock blast absent medal slam world sweet',
-    await fullaDID.importMnemonic(result.mnemonic);
-
-    // Import existing privateKey () => return {did|authDID, privateKey}
-    // privateKey example: ff396d82b24b3f8f200cc240bb6d0770911c82e1d8c0199638373221efedabd5
-    await fullaDID.importPrivateKey(result.privateKey);
+    const fulaDID = new FulaDID();
+    // Create DID identity (_secretKey, signature) => return {did|authDID, mnemonic, privateKey}
+    await fulaDID.create(secretKey, signature);
    ```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -77,16 +62,16 @@ Install NPM package
 <!-- USAGE EXAMPLES -->
 ## Tagged Encryption (Tagged DID) 
    ```js
-    import {FullaDID, TaggedEncryption} from '@functionland/fula-sec'
+    import {FulaDID, TaggedEncryption} from '@functionland/fula-sec'
 
     // Alice creates own DID 
-    const AliceDID = new FullaDID();
-    await AliceDID.create();
+    const AliceDID = new FulaDID();
+    await AliceDID.create(secretKey, signature);
     const taggedA = new TaggedEncryption(AliceDID.did);
 
     // Bob creates own DID
-    const BobDID = new FullaDID();
-    await BobDID.create();
+    const BobDID = new FulaDID();
+    await BobDID.create(secretKey, signature);
     const taggedB = new TaggedEncryption(BobDID.did);
 
     // 1. Handshake             |Alice DID| <---  |Bob DID|      
@@ -109,19 +94,19 @@ Install NPM package
 <!-- USAGE EXAMPLES -->
 ## Asymmetric Encryption 
    ```js
-    import {FullaDID, AsymEncryption} from '@functionland/fula-sec'
+    import {FulaDID, AsymEncryption} from '@functionland/fula-sec'
 
      // Alice creates own DID (Issuer)
-    const AliceDID = new FullaDID();
-    await AliceDID.create();
+    const AliceDID = new FulaDID();
+    await AliceDID.create(secretKey, signature);
     // Set privateKey
     const asymEncA = new AsymEncryption(AliceDID.privateKey);
 
      // Bob creates own DID (Audience)
-    const BliceDID = new FullaDID();
-    await BliceDID.create();
+    const BobDID = new FulaDID();
+    await BobDID.create(secretKey, signature);
     // Set privateKey
-    const asymEncB = new AsymEncryption(BliceDID.privateKey);
+    const asymEncB = new AsymEncryption(BobDID.privateKey);
 
     /* 
        1. Bob shares PublicKey with Alice
@@ -153,7 +138,7 @@ Run doc cmd
     
     npx typedoc --out docs
 
-[Fulla Sec DOC](http://127.0.0.1:5500/libraries/fula-sec/docs/classes/FullaDID.html)
+[Fulla Sec DOC](http://127.0.0.1:5500/libraries/fula-sec/docs/classes/FulaDID.html)
 
 
 
