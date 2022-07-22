@@ -6,7 +6,7 @@ const typeDefs = `
     scalar JSONObject
     input ReadInput {
         collection:String!
-        filter:JSON
+        filter:JSON = {}
     }
     input CreateInput {
         collection:String!
